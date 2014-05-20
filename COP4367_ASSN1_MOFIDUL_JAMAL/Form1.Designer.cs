@@ -35,7 +35,7 @@
             // invalidateTimer
             // 
             this.invalidateTimer.Enabled = true;
-            this.invalidateTimer.Interval = 16;
+            this.invalidateTimer.Interval = 8;
             this.invalidateTimer.Tick += new System.EventHandler(this.invalidateTimer_Tick);
             // 
             // Form1

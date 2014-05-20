@@ -18,20 +18,20 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         public PointF Velocity = new PointF();
         private float ColorDecayFactor = 1f;
         public float Size;
-
+        public static Random rand = new Random();
         public Particle()
         {
-            Random rand = new Random();
+            
             //random pos
             Position.X = rand.Next(0, 800);
             Position.Y = rand.Next(0, 600);
             //random motions
-            Velocity.X = rand.Next(1, 10);
-            Velocity.Y = rand.Next(1, 10);
+            Velocity.X = rand.Next(-10, 10);
+            Velocity.Y = rand.Next(-10, 10);
             //random color
             ColorARGB = Color.FromArgb(255, rand.Next(0, 255), rand.Next(0, 255), rand.Next(0, 255));
             ColorPen = new Pen(ColorARGB);
-            LifeTimeInTicks = rand.Next(5, 200);
+            LifeTimeInTicks = rand.Next(5, 500);
             ColorDecayFactor = 255f /(float) LifeTimeInTicks;
             //random size
             Size = rand.Next(50, 255);
@@ -50,7 +50,11 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
             Size = size;
         }
 
-        public void DoFrame()
+        public void Draw(Graphics graphicsContext)
+        {
+            graphicsContext.FillEllipse(ColorPen.Brush, Position.X, Position.Y, Size, Size);
+        }
+        public void Update()
         {
             LifeTimeInTicks--;
             if (LifeTimeInTicks == 0)
