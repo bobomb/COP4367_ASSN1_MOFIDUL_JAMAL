@@ -9,14 +9,17 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
 {
     public class ParticleEngine
     {
-        Particle[] Particles;
+        IParticle[] Particles;
 
         public ParticleEngine(int numberOfParticles)
         {
-            Particles = new Particle[numberOfParticles];
+            Particles = new IParticle[numberOfParticles];
             for(int i = 0; i < numberOfParticles; i++)
             {
-                Particles[i] = new Particle();
+                if (Particle.rand.Next(0, 1) % 1 == 0)
+                    Particles[i] = new GrowingShrinkingParticle();
+                else
+                    Particles[i] = new Particle();
             }
         }
 
@@ -31,11 +34,11 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         {
             for (int i = 0; i < Particles.Count(); i++)
             {
-                Particle p = Particles[i];
+                IParticle p = Particles[i];
                 p.Update();
                 if(p.IsAlive == false)
                 {
-                    Particles[i] = new Particle();
+                    Particles[i] = new GrowingShrinkingParticle();
                 }
             }
         }
