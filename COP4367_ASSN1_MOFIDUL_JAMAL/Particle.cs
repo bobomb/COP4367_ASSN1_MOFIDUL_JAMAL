@@ -8,7 +8,7 @@ using System.Drawing;
 namespace COP4367_ASSN1_MOFIDUL_JAMAL
 {
     //yes i know i am violating OOP principals of encapsulating data by making it all public. bite me
-    public class Particle : COP4367_ASSN1_MOFIDUL_JAMAL.IParticle
+    public class Particle : COP4367_ASSN1_MOFIDUL_JAMAL.IDrawable
     {
         public PointF Position = new PointF();
         public Color ColorARGB = new Color();

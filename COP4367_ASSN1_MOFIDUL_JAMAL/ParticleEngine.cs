@@ -9,11 +9,11 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
 {
     public class ParticleEngine
     {
-        IParticle[] Particles;
+        IDrawable[] Particles;
 
         public ParticleEngine(int numberOfParticles)
         {
-            Particles = new IParticle[numberOfParticles];
+            Particles = new IDrawable[numberOfParticles];
             for(int i = 0; i < numberOfParticles; i++)
             {
                 if (Particle.rand.Next(0, 1) % 1 == 0)
@@ -34,7 +34,7 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         {
             for (int i = 0; i < Particles.Count(); i++)
             {
-                IParticle p = Particles[i];
+                IDrawable p = Particles[i];
                 p.Update();
                 if(p.IsAlive == false)
                 {
