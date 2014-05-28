@@ -33,6 +33,26 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
             LifeTimeInTicks = rand.Next(250, 1000);
             ColorDecayFactor = 255f /(float) LifeTimeInTicks;
             //random size
+            Diameter = rand.Next(25, 175);
+            ColorPen.Brush = new SolidBrush(ColorARGB);
+
+        }
+
+        public Particle(int lifetime)
+        {
+
+            //random pos
+            Position.X = rand.Next(0, Form1.WindowSize.X);
+            Position.Y = rand.Next(0, Form1.WindowSize.Y);
+            //random motions
+            Velocity.X = rand.Next(-10, 10);
+            Velocity.Y = rand.Next(-10, 10);
+            //random color
+            ColorARGB = Color.FromArgb(255, rand.Next(0, 255), rand.Next(0, 255), rand.Next(0, 255));
+            ColorPen = new Pen(ColorARGB);
+            LifeTimeInTicks = lifetime;
+            ColorDecayFactor = 255f / (float)LifeTimeInTicks;
+            //random size
             Diameter = rand.Next(50, 255);
             ColorPen.Brush = new SolidBrush(ColorARGB);
 
@@ -81,9 +101,27 @@ public static class MyExtensions
         return me;
     }
 
-    public static void MultiplyScalar(this PointF me, float scalar)
+    public static PointF MultiplyScalar(this PointF me, float scalar)
     {
         me.X *= scalar;
         me.Y *= scalar;
+
+        return me;
+    }
+
+    public static PointF RadiallyFromCenter(this PointF me, double radius, double angleInDegrees)
+    {
+        double angleInRadians = angleInDegrees * (Math.PI / 180);
+        me.X += (float)(Math.Cos(angleInRadians) * radius);
+        me.Y += (float)(Math.Sin(angleInRadians) * radius);
+        return me;
+    }
+
+    public static PointF RadiallyFromZero(this PointF me, double radius, double angleInDegrees)
+    {
+        double angleInRadians = angleInDegrees * (Math.PI / 180);
+        me.X = (float)(Math.Cos(angleInRadians) * radius);
+        me.Y = (float)(Math.Sin(angleInRadians) * radius);
+        return me;
     }
 }

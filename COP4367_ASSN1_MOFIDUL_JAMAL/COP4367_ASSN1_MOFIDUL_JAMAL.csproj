@@ -51,7 +51,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GrowingShrinkingParticle.cs" />
-    <Compile Include="IParticle.cs" />
+    <Compile Include="IDrawable.cs" />
     <Compile Include="Particle.cs" />
     <Compile Include="ParticleEmitter.cs" />
     <Compile Include="ParticleEngine.cs" />
