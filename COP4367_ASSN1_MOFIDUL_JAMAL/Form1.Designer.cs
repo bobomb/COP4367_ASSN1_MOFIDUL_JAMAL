@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.invalidateTimer = new System.Windows.Forms.Timer(this.components);
+            this.startupTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // invalidateTimer
@@ -37,6 +38,12 @@
             this.invalidateTimer.Enabled = true;
             this.invalidateTimer.Interval = 8;
             this.invalidateTimer.Tick += new System.EventHandler(this.invalidateTimer_Tick);
+            // 
+            // startupTimer
+            // 
+            this.startupTimer.Enabled = true;
+            this.startupTimer.Interval = 3000;
+            this.startupTimer.Tick += new System.EventHandler(this.startupTimer_Tick);
             // 
             // Form1
             // 
@@ -58,6 +65,7 @@
         #endregion
 
         private System.Windows.Forms.Timer invalidateTimer;
+        private System.Windows.Forms.Timer startupTimer;
     }
 }
 

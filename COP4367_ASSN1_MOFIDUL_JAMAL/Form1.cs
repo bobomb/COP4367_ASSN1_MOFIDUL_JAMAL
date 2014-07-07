@@ -12,9 +12,10 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
 {
     public partial class Form1 : Form
     {
-        Particle testParticle = new Particle(); //new random particle
-        ParticleEngine engine;
+        //Bird testParticle = new Bird(); //new random particle
+        FlockingEngine engine;
         private static Size windowSize;
+        int FLOCK_SIZE = 50;
         public static Point WindowSize
         {
             get { return new Point(windowSize); }
@@ -23,19 +24,23 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         {
             InitializeComponent();
             windowSize = this.ClientSize;
-            engine =  new ParticleEngine(500);
+            
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Graphics graphicsContext = e.Graphics;
-            engine.Draw(graphicsContext);
+            if (engine != null)
+            {
+                Graphics graphicsContext = e.Graphics;
+                engine.Draw(graphicsContext);
+            }
             //graphicsContext.FillEllipse(testParticle.ColorPen.Brush, testParticle.Position.X, testParticle.Position.Y, testParticle.Size, testParticle.Size);
         }
 
         private void invalidateTimer_Tick(object sender, EventArgs e)
         {
-            engine.Update();
+            if(engine != null)
+                engine.Update();
             Invalidate();
         }
 
@@ -47,6 +52,12 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         private void Form1_Resize(object sender, EventArgs e)
         {
             windowSize = this.ClientSize;
+        }
+
+        private void startupTimer_Tick(object sender, EventArgs e)
+        {
+            startupTimer.Stop();
+            engine = new FlockingEngine(FLOCK_SIZE);
         }
     }
 }

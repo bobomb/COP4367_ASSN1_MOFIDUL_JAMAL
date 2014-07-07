@@ -8,6 +8,7 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
 {
     static class Program
     {
+        public static Random Rand = new Random();
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
