@@ -13,10 +13,13 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         public Vector3 Position;
         public Vector3 Acceleration;
         public Vector3 Velocity;
+        public float MaxVelocity = 10f;
+
         public bool IsAlive = true;
         public Pen ColorPen;
         public Color ColorARGB = new Color();
         public float Diameter = 5f;
+        public Dictionary<Bird, float> distanceTable = new Dictionary<Bird, float>();
 
         public Bird()
         {
@@ -25,6 +28,9 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
             ColorPen.Brush = new SolidBrush(ColorARGB);
             Position.X = Program.Rand.Next(Form1.WindowSize.X);
             Position.Y = Program.Rand.Next(Form1.WindowSize.Y);
+            Velocity.X = Program.Rand.Next(-(int)MaxVelocity, (int)MaxVelocity);
+            Velocity.Y = Program.Rand.Next(-(int)MaxVelocity, (int)MaxVelocity);
+            
         }
         public Bird(Color color)
         {
@@ -32,11 +38,21 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
             ColorPen = new Pen(ColorARGB);
             ColorPen.Brush = new SolidBrush(ColorARGB);
         }
+
+        public void Update()
+        {
+            if(Velocity.Magnitude > MaxVelocity)
+            {
+                Velocity.Normalize();
+                Velocity *= MaxVelocity;
+            }
+            Position.X += Velocity.X;
+            Position.Y += Velocity.Y;
+        }
+
         public  void Draw(System.Drawing.Graphics graphicsContext)
         {
             graphicsContext.FillEllipse(ColorPen.Brush, Position.X- (Diameter / 2f), Position.Y - (Diameter / 2f), Diameter, Diameter);
         }
-        
-   
     }
 }

@@ -15,7 +15,7 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         //Bird testParticle = new Bird(); //new random particle
         FlockingEngine engine;
         private static Size windowSize;
-        int FLOCK_SIZE = 50;
+        int FLOCK_SIZE = 100;
         public static Point WindowSize
         {
             get { return new Point(windowSize); }
