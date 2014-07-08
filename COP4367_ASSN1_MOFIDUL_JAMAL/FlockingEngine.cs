@@ -9,13 +9,13 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
 {
     public class FlockingEngine
     {
-        public float AlignmentRadius = 75f;
-        public float CohesionRadius = 50f;
+        public float AlignmentRadius = 55f;
+        public float CohesionRadius = 65f;
         public float SeperationRadius = 20f;
         public float AlignmentWeight = .5f;
         public float CohesionWeight = .5f;
         public float SeperationWeight = 5f;
-        public float WallAvoidanceForce = 18f;
+        public float WallAvoidanceForce = 20f;
 
         Bird[] BirdList;
         public FlockingEngine(int numberOfBirds)
@@ -51,6 +51,9 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
             Vector3 alignmentVec = new Vector3();
             Vector3 cohesionVec = new Vector3();
             Vector3 seperationVec = new Vector3();
+            int neighborCountAlignment = 0;
+            int neighborCountSeperation = 0;
+            int neighborCountCohesion = 0;
             for(int bi = 0; bi < BirdList.Length; bi++)
             {
                 alignmentVec.X = 0;
@@ -59,12 +62,13 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
                 cohesionVec.Y = 0;
                 seperationVec.X = 0;
                 seperationVec.Y = 0;
+                neighborCountAlignment = 0;
+                neighborCountCohesion = 0;
+                neighborCountSeperation = 0;
                 //precalculate distance tables ONCE
                 CalculateDistanceTable(BirdList[bi]);
                 //Iterating through the birdlist for every bird  three times over is slow as hell so do it once here
-                int neighborCountAlignment = 0;
-                int neighborCountSeperation = 0;
-                int neighborCountCohesion = 0;
+
 
                 //ALIGNMENT
                 for (int i = 0; i < BirdList.Length; i++)
@@ -132,6 +136,7 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
                 if(BirdList[bi].Position.X < 0)
                     BirdList[bi].Velocity.X += WallAvoidanceForce;
 
+                
                 if (BirdList[bi].Position.X > Form1.WindowSize.X)
                     BirdList[bi].Velocity.X -= WallAvoidanceForce;
 

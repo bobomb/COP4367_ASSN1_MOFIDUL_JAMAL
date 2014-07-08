@@ -13,7 +13,7 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         public Vector3 Position;
         public Vector3 Acceleration;
         public Vector3 Velocity;
-        public float MaxVelocity = 10f;
+        public float MaxVelocity = 20f;
 
         public bool IsAlive = true;
         public Pen ColorPen;
@@ -44,7 +44,8 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
             if(Velocity.Magnitude > MaxVelocity)
             {
                 Velocity.Normalize();
-                Velocity *= MaxVelocity;
+                Velocity.X *= MaxVelocity;
+                Velocity.Y *= MaxVelocity;
             }
             Position.X += Velocity.X;
             Position.Y += Velocity.Y;
