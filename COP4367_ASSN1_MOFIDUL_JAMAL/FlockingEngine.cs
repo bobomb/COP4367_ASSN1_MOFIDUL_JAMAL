@@ -10,8 +10,8 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
     public class FlockingEngine
     {
         public float AlignmentRadius = 55f;
-        public float CohesionRadius = 65f;
-        public float SeperationRadius = 20f;
+        public float CohesionRadius = 100f;
+        public float SeperationRadius = 40f;
         public float AlignmentWeight = .5f;
         public float CohesionWeight = .5f;
         public float SeperationWeight = 5f;

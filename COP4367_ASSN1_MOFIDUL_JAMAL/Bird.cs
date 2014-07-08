@@ -13,12 +13,12 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         public Vector3 Position;
         public Vector3 Acceleration;
         public Vector3 Velocity;
-        public float MaxVelocity = 20f;
+        public float MaxVelocity = 12f;
 
         public bool IsAlive = true;
         public Pen ColorPen;
         public Color ColorARGB = new Color();
-        public float Diameter = 5f;
+        public float Diameter = 25f;
         public Dictionary<Bird, float> distanceTable = new Dictionary<Bird, float>();
 
         public Bird()
