@@ -13,19 +13,20 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         public Vector3 Position;
         public Vector3 Acceleration;
         public Vector3 Velocity;
-        public float MaxVelocity = 12f;
+        public float MaxVelocity = 15f;
         Pen[] FadeBrushes = new Pen[MAX_HISTORY];
         public bool IsAlive = true;
         public Pen ColorPen;
         public Color ColorARGB = new Color();
-        public float Diameter = 25f;
+        public float Diameter = 30f;
         public Dictionary<Bird, float> distanceTable = new Dictionary<Bird, float>();
         public List<Vector3> PositionHistory = new List<Vector3>();
-        public const int MAX_HISTORY = 100;
+        public const int MAX_HISTORY = 35;
 
         public Bird()
         {
-            ColorARGB = Color.FromArgb(Program.Rand.Next(255), Program.Rand.Next(255), Program.Rand.Next(255));
+            //ColorARGB = Color.FromArgb(Program.Rand.Next(255), Program.Rand.Next(255), Program.Rand.Next(255));
+            ColorARGB = Color.Black;
             ColorPen = new Pen(ColorARGB);
             ColorPen.Brush = new SolidBrush(ColorARGB);
             int k = 0;
@@ -76,6 +77,7 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         {
             //draw me
             graphicsContext.FillEllipse(ColorPen.Brush, Position.X- (Diameter / 2f), Position.Y - (Diameter / 2f), Diameter, Diameter);
+            
             lock (PositionHistory)
             {
                 for (int i = 0; i < PositionHistory.Count; i++)
@@ -83,6 +85,7 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
                     graphicsContext.FillEllipse(FadeBrushes[i].Brush, PositionHistory[i].X - (Diameter / 2f), PositionHistory[i].Y - (Diameter / 2f), Diameter, Diameter);
                 }
             }
+             
         }
     }
 }

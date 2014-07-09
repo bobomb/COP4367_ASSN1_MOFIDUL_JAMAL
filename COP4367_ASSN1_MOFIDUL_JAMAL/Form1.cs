@@ -19,6 +19,7 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         int FLOCK_SIZE = 75;
         private Bitmap myBitmap;
         Graphics bitmapGraphicsContext;
+        ControllerForm controller;
 
         public static Point WindowSize
         {
@@ -48,6 +49,8 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
             bgThread.IsBackground = true;
             bgThread.Priority = ThreadPriority.AboveNormal;
             bgThread.Start();
+
+            
 
         }
 
@@ -85,6 +88,8 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         {
             startupTimer.Stop();
             engine = new FlockingEngine(FLOCK_SIZE);
+            controller = new ControllerForm(engine);
+            controller.Show();
         }
     }
 }

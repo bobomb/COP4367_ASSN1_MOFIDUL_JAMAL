@@ -9,12 +9,12 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
 {
     public class FlockingEngine
     {
-        public float AlignmentRadius = 55f;
-        public float CohesionRadius = 100f;
+        public float AlignmentRadius = 155f;
+        public float CohesionRadius = 25f;
         public float SeperationRadius = 40f;
-        public float AlignmentWeight = .5f;
-        public float CohesionWeight = .5f;
-        public float SeperationWeight = 5f;
+        public float AlignmentWeight = .2f;
+        public float CohesionWeight = .1f;
+        public float SeperationWeight = 10f;
         public float WallAvoidanceForce = 20f;
 
         Bird[] BirdList;
@@ -123,9 +123,11 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
                 }
                 try
                 {
+                    /*
                     alignmentVec.Normalize();
                     cohesionVec.Normalize();
                     seperationVec.Normalize();
+                     * */
                 }
                 catch (Exception E) { }
                 BirdList[bi].Velocity.X += alignmentVec.X * AlignmentWeight + cohesionVec.X * CohesionWeight + seperationVec.X * SeperationWeight;
