@@ -13,24 +13,24 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
         public Vector3 Position;
         public Vector3 Acceleration;
         public Vector3 Velocity;
-        public float MaxVelocity = 15f;
+        public static float MaxVelocity = 15f;
         Pen[] FadeBrushes = new Pen[MAX_HISTORY];
         public bool IsAlive = true;
         public Pen ColorPen;
         public Color ColorARGB = new Color();
-        public float Diameter = 30f;
+        public static float Diameter = 30f;
         public Dictionary<Bird, float> distanceTable = new Dictionary<Bird, float>();
         public List<Vector3> PositionHistory = new List<Vector3>();
-        public const int MAX_HISTORY = 35;
-
+        public const int MAX_HISTORY = 254;
+        public static int HistorySize = 35;
         public Bird()
         {
-            //ColorARGB = Color.FromArgb(Program.Rand.Next(255), Program.Rand.Next(255), Program.Rand.Next(255));
-            ColorARGB = Color.Black;
+            ColorARGB = Color.FromArgb(Program.Rand.Next(255), Program.Rand.Next(255), Program.Rand.Next(255));
+            //ColorARGB = Color.Black;
             ColorPen = new Pen(ColorARGB);
             ColorPen.Brush = new SolidBrush(ColorARGB);
             int k = 0;
-            for(int i = 0; i < 254; i+=255/(MAX_HISTORY))
+            for(int i = 0; i < 255; i++)
             {
                 if (k == MAX_HISTORY)
                     break;
@@ -75,17 +75,24 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
 
         public  void Draw(System.Drawing.Graphics graphicsContext)
         {
-            //draw me
+            //draw me and my 25% bigger circle
+            //really shoulda just used radius instead of diamter to simplify the maths
             graphicsContext.FillEllipse(ColorPen.Brush, Position.X- (Diameter / 2f), Position.Y - (Diameter / 2f), Diameter, Diameter);
-            
-            lock (PositionHistory)
+            graphicsContext.DrawEllipse(ColorPen, Position.X - (.625f * Diameter )  , Position.Y - (.625f * Diameter) , 1.25f * Diameter , 1.25f * Diameter);
+            //draw direction arrow?
+            graphicsContext.DrawLine(ColorPen, Position.X , Position.Y , (Position.X ) + 2f*Velocity.X, (Position.Y ) + 2f*Velocity.Y);
+            if (HistorySize > 0)
             {
-                for (int i = 0; i < PositionHistory.Count; i++)
+                lock (PositionHistory)
                 {
-                    graphicsContext.FillEllipse(FadeBrushes[i].Brush, PositionHistory[i].X - (Diameter / 2f), PositionHistory[i].Y - (Diameter / 2f), Diameter, Diameter);
+                    int k = PositionHistory.Count;
+                    for (int i = MAX_HISTORY - 1; i > 0; i -= MAX_HISTORY / HistorySize)
+                    {
+                        k--;
+                        graphicsContext.FillEllipse(FadeBrushes[i].Brush, PositionHistory[k].X - (Diameter / 2f), PositionHistory[k].Y - (Diameter / 2f), Diameter, Diameter);
+                    }
                 }
             }
-             
         }
     }
 }

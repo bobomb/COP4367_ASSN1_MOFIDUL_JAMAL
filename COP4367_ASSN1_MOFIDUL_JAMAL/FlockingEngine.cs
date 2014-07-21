@@ -68,9 +68,6 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
                 //precalculate distance tables ONCE
                 CalculateDistanceTable(BirdList[bi]);
                 //Iterating through the birdlist for every bird  three times over is slow as hell so do it once here
-
-
-                //ALIGNMENT
                 for (int i = 0; i < BirdList.Length; i++)
                 {
                     if (BirdList[bi] != BirdList[i])
@@ -81,7 +78,6 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
                             neighborCountAlignment++;
                             alignmentVec.X += BirdList[i].Velocity.X;
                             alignmentVec.Y += BirdList[i].Velocity.Y;
-                            
                         }
                         //cohesion
                         if (BirdList[bi].distanceTable[BirdList[i]] < CohesionRadius)
@@ -138,7 +134,6 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
                 if(BirdList[bi].Position.X < 0)
                     BirdList[bi].Velocity.X += WallAvoidanceForce;
 
-                
                 if (BirdList[bi].Position.X > Form1.WindowSize.X)
                     BirdList[bi].Velocity.X -= WallAvoidanceForce;
 
@@ -166,102 +161,6 @@ namespace COP4367_ASSN1_MOFIDUL_JAMAL
                     }
                 }
             }
-        }
-
-        public Vector3 CalculateAlignment(Bird b)
-        {
-            throw new NotImplementedException();
-            /*
-            Vector3 alignmentVec = new Vector3();
-            int neighborCount = 0;
-            //foreach(Bird neighborBird in BirdList.Where(bfound => bfound.Position.Distance(b.Position) < AlignmentRadius))
-            for (int i = 0; i < BirdList.Length; i++)
-            {
-                if (b != BirdList[i])
-                {
-                    if (b.distanceTable[BirdList[i]] < AlignmentRadius)
-                    {
-                        neighborCount++;
-                        alignmentVec += BirdList[i].Velocity;
-                    }
-                }
-            }
-
-            alignmentVec /= neighborCount;
-            try
-            {
-                alignmentVec.Normalize();
-            }
-            catch (Exception E)
-            {
-
-            }
-            return alignmentVec;
-             * */
-        }
-
-        public Vector3 CalculateCohesion(Bird b)
-        {
-            throw new NotImplementedException();
-            /*
-            Vector3 cohesionVec = new Vector3();
-            int neighborCount = 0;
-            //foreach (Bird neighborBird in BirdList.Where(bfound => bfound.Position.Distance(b.Position) < CohesionRadius))
-
-            for (int i = 0; i < BirdList.Length; i++)
-            {
-                if (BirdList[bi] != BirdList[i])
-                {
-                    if (BirdList[bi].distanceTable[BirdList[i]] < CohesionRadius)
-                    {
-                        neighborCount++;
-                        cohesionVec += BirdList[i].Position;
-                    }
-                }
-            }
-
-            cohesionVec /= neighborCount;
-            cohesionVec = cohesionVec - BirdList[bi].Position;
-            try
-            {
-                cohesionVec.Normalize();
-            }
-            catch(Exception E){}
-             * */
-            
-        }
-
-        public Vector3 CalculateSeperation(Bird b)
-        {
-            throw new NotImplementedException();
-            /*
-            Vector3 seperationVec = new Vector3();
-            int neighborCount = 0;
-            //foreach (Bird neighborBird in BirdList.Where(bfound => bfound.Position.Distance(b.Position) < SeperationRadius))
-            for (int i = 0; i < BirdList.Length; i++)
-            {
-                if (b != BirdList[i])
-                {
-                    if (BirdList[bi].distanceTable[BirdList[i]] < SeperationRadius)
-                    {
-                        neighborCount++;
-                        seperationVec += BirdList[i].Position - BirdList[bi].Position;
-                    }
-                }
-            }
-
-            seperationVec /= neighborCount;
-            seperationVec *= -1f;
-            try
-            {
-                seperationVec.Normalize();
-            }
-            catch (Exception E)
-            {
-
-            }
-            return seperationVec;
-             * */
         }
     }
 }
